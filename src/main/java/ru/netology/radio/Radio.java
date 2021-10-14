@@ -1,106 +1,87 @@
 package ru.netology.radio;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+
 public class Radio {
 
-
-    // громкость
     private int currentVolume;
     private int minVolume = 0;
     private int maxVolume = 100;
 
-    // станция
     private int currentStation;
     private int minStation = 0;
     private int maxStation = 9;
 
-    public Radio(int currentVolume, int minVolume, int maxVolume, int currentStation, int minStation, int maxStation) {
-        this.currentVolume = currentVolume;
-        this.minVolume = minVolume;
-        this.maxVolume = maxVolume;
-        this.currentStation = currentStation;
-        this.minStation = minStation;
-        this.maxStation = maxStation;
+
+    public int getCurrentStation() {
+        return currentStation;
     }
 
-    public Radio() {
-    }
-
-
-    // 1) настройка текущей громкости
-    public int getCurrentVolume() { // покажи текущую громкость
+    public int getCurrentVolume() {
         return currentVolume;
     }
 
-    public void setCurrentVolume(int currentVolume) {  // выставить значения громкости, что хотим вывести
-        if (currentVolume < minVolume) { // от 0
+    //настройка громкости
+
+    public void setCurrentVolume(int currentVolume) {
+        if (currentVolume < minVolume) {
+            this.currentVolume = minVolume;
             return;
         }
-        if (currentVolume > maxVolume) { // до 100
+        if (currentVolume > maxVolume) {
+            this.currentVolume = maxVolume;
             return;
         }
         this.currentVolume = currentVolume;
     }
 
-    public int getMaxVolume() {
-        return maxVolume;
-    }
 
-    public int getMinVolume() {
-        return minVolume;
-    }
-
-
-    // 2) переключение громкости
     public void increaseVolume() {
         if (currentVolume < maxVolume) {
-            currentVolume = currentVolume + 1;
+            currentVolume++;
         }
     }
 
     public void decreaseVolume() {
         if (currentVolume > minVolume) {
-            currentVolume = currentVolume - 1;
+            currentVolume--;
         }
     }
 
-    // 1) настройка текущей станции
-    public int getCurrentStation() { // покажи текущую станцию
-        return currentStation;
-    }
+    //настройка станции
 
-    public void setCurrentStation(int currentStation) {  // выставить значения станции, что хотим вывести
-        if (currentStation < minStation) { // от 0
+    public void setCurrentStation(int currentStation) {
+        if (currentStation < minStation) {
+            this.currentStation = minStation;
             return;
         }
-        if (currentStation > maxStation) { // до 9
+
+        if (currentStation > maxStation) {
+            this.currentStation = maxStation;
             return;
         }
         this.currentStation = currentStation;
     }
 
-    public int getMaxStation() {
-        return maxStation;
-    }
-
-    public int getMinStation() {
-        return minStation;
-    }
-
-
-    // 2) переключение станции
     public void increaseStation() {
-        if (currentStation < maxStation) {
-            currentStation = currentStation + 1;
-        } else {
+        if (currentStation == maxStation) {
             currentStation = minStation;
+            return;
         }
+        currentStation++;
     }
 
     public void decreaseStation() {
-        if (currentStation > minStation) {
-            currentStation = currentStation - 1;
-        } else {
+        if (currentStation == minStation) {
             currentStation = maxStation;
+            return;
         }
+        currentStation--;
     }
 }
