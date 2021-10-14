@@ -2,15 +2,29 @@ package ru.netology.radio;
 
 public class Radio {
 
+
     // громкость
     private int currentVolume;
     private int minVolume = 0;
-    private int maxVolume = 10;
+    private int maxVolume = 100;
 
     // станция
     private int currentStation;
     private int minStation = 0;
     private int maxStation = 9;
+
+    public Radio(int currentVolume, int minVolume, int maxVolume, int currentStation, int minStation, int maxStation) {
+        this.currentVolume = currentVolume;
+        this.minVolume = minVolume;
+        this.maxVolume = maxVolume;
+        this.currentStation = currentStation;
+        this.minStation = minStation;
+        this.maxStation = maxStation;
+    }
+
+    public Radio() {
+    }
+
 
     // 1) настройка текущей громкости
     public int getCurrentVolume() { // покажи текущую громкость
@@ -21,7 +35,7 @@ public class Radio {
         if (currentVolume < minVolume) { // от 0
             return;
         }
-        if (currentVolume > maxVolume) { // до 10
+        if (currentVolume > maxVolume) { // до 100
             return;
         }
         this.currentVolume = currentVolume;
@@ -34,6 +48,7 @@ public class Radio {
     public int getMinVolume() {
         return minVolume;
     }
+
 
     // 2) переключение громкости
     public void increaseVolume() {
@@ -70,6 +85,7 @@ public class Radio {
     public int getMinStation() {
         return minStation;
     }
+
 
     // 2) переключение станции
     public void increaseStation() {
