@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 @Data
 
 public class Radio {
-
     private int currentVolume;
     private int minVolume = 0;
     private int maxVolume = 100;
@@ -17,17 +16,25 @@ public class Radio {
     private int currentStation;
     private int minStation = 0;
     private int maxStation = 9;
+    private int countStation = 10;
 
 
-    public int getCurrentStation() {
-        return currentStation;
+    public Radio(int countStation) {
+        this.countStation = countStation;
     }
 
-    public int getCurrentVolume() {
-        return currentVolume;
+    public Radio (int countStation, int currentStation) { // количество станций
+        this.countStation = countStation;
+        maxStation = countStation - 1;
+        if (currentStation > maxStation) {
+            this.currentStation = minStation;
+            return;
+        }
+        this.currentStation = currentStation;
     }
 
     //настройка громкости
+
 
     public void setCurrentVolume(int currentVolume) {
         if (currentVolume < minVolume) {
@@ -40,7 +47,6 @@ public class Radio {
         }
         this.currentVolume = currentVolume;
     }
-
 
     public void increaseVolume() {
         if (currentVolume < maxVolume) {
