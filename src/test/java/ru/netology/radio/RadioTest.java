@@ -1,23 +1,23 @@
 package ru.netology.radio;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class RadioTest {
 
-    private Radio radio = new Radio(0, 0, 100, 0, 0, 9 );
+    private Radio radio = new Radio();
 
     @Test
-    public void shouldUseNoArgsConstructor() {
-    }
+    public void shouldUseCountConstructor() {
 
-    @Test
-    public void shouldUseAllArgsConstructor() {
+        radio.setCountStation(10);
 
-        Radio radio = new Radio();
+        radio.getCountStation();
 
-        assertEquals(100, radio.getMaxVolume());
+        assertEquals(10, radio.getCountStation());
     }
 
     // громкость
@@ -158,7 +158,7 @@ public class RadioTest {
 
         radio.setCurrentStation(9);
 
-        radio.getMaxStation();
+        radio.getCurrentStation();
 
         assertEquals(9, radio.getCurrentStation());
     }
@@ -189,8 +189,7 @@ public class RadioTest {
 
         radio.decreaseStation();
 
-        assertEquals(9, radio.getCurrentStation());
-
+        assertEquals(9, radio.getMaxStation());
     }
 
     @Test
@@ -282,5 +281,33 @@ public class RadioTest {
         radio.decreaseStation();
 
         assertEquals(9, radio.getCurrentStation());
+    }
+
+    @ParameterizedTest
+    @CsvSource(
+            {"5, 4",
+             "8, 7",
+             "0, 9"
+            })
+
+    public void shouldCountCurrentStationNumber(int countStation, int currentStation) {
+
+        Radio radio = new Radio(countStation, currentStation);
+
+        assertEquals(countStation, radio.getCountStation());
+    }
+
+    @ParameterizedTest
+    @CsvSource(
+             {"5",
+              "8",
+              "0"
+            })
+
+    public void shouldCountStation(int countStation) {
+
+        Radio radio = new Radio(countStation);
+
+        assertEquals(countStation, radio.getCountStation());
     }
 }

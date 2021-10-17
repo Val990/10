@@ -12,17 +12,31 @@ public class Radio {
     private int currentStation;
     private int minStation = 0;
     private int maxStation = 9;
+    private int countStation = 10;
 
-    public Radio(int currentVolume, int minVolume, int maxVolume, int currentStation, int minStation, int maxStation) {
-        this.currentVolume = currentVolume;
-        this.minVolume = minVolume;
-        this.maxVolume = maxVolume;
-        this.currentStation = currentStation;
-        this.minStation = minStation;
-        this.maxStation = maxStation;
+    public Radio(int countStation) {
+        this.countStation = countStation;
+    }
+
+    public int getCountStation() {
+        return countStation;
+    }
+
+    public void setCountStation(int countStation) {
+        this.countStation = countStation;
     }
 
     public Radio() {
+    }
+
+    public Radio (int countStation, int currentStation) { // количество станций
+        this.countStation = countStation;
+        maxStation = countStation - 1;
+        if (currentStation > maxStation) {
+            this.currentStation = minStation;
+            return;
+        }
+        this.currentStation = currentStation;
     }
 
 
@@ -64,11 +78,12 @@ public class Radio {
     }
 
     // 1) настройка текущей станции
-    public int getCurrentStation() { // покажи текущую станцию
+   public int getCurrentStation() { // покажи текущую станцию
         return currentStation;
     }
 
-    public void setCurrentStation(int currentStation) {  // выставить значения станции, что хотим вывести
+
+   public void setCurrentStation(int currentStation) {  // выставить значения станции, что хотим вывести
         if (currentStation < minStation) { // от 0
             return;
         }
