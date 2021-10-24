@@ -323,8 +323,8 @@ public class RadioTest {
     @ParameterizedTest
     @CsvSource(
             {"5",
-                    "8",
-                    "0"
+             "8",
+             "0"
             })
 
     public void shouldCountStation(int countStation) {
