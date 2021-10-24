@@ -2,7 +2,6 @@ package ru.netology.radio;
 
 public class Radio {
 
-
     // громкость
     private int currentVolume;
     private int minVolume = 0;
@@ -13,6 +12,9 @@ public class Radio {
     private int minStation = 0;
     private int maxStation = 9;
     private int countStation = 10;
+
+    public Radio() {
+    }
 
     public Radio(int countStation) {
         this.countStation = countStation;
@@ -26,45 +28,40 @@ public class Radio {
         this.countStation = countStation;
     }
 
-    public Radio() {
+
+    //  громкость
+
+    public int getMinVolume() {
+        return minVolume;
     }
 
-    public Radio (int countStation, int currentStation) { // количество станций
-        this.countStation = countStation;
-        maxStation = countStation - 1;
-        if (currentStation > maxStation) {
-            this.currentStation = minStation;
-            return;
-        }
-        this.currentStation = currentStation;
+    public void setMinVolume(int minVolume) {
+        this.minVolume = minVolume;
     }
 
-
-    // 1) настройка текущей громкости
-    public int getCurrentVolume() { // покажи текущую громкость
+    public int getCurrentVolume() {
         return currentVolume;
-    }
-
-    public void setCurrentVolume(int currentVolume) {  // выставить значения громкости, что хотим вывести
-        if (currentVolume < minVolume) { // от 0
-            return;
-        }
-        if (currentVolume > maxVolume) { // до 100
-            return;
-        }
-        this.currentVolume = currentVolume;
     }
 
     public int getMaxVolume() {
         return maxVolume;
     }
 
-    public int getMinVolume() {
-        return minVolume;
+    public void setMaxVolume(int maxVolume) {
+        this.maxVolume = maxVolume;
+    }
+
+    public void setCurrentVolume(int currentVolume) {
+        if (currentVolume > maxVolume) {
+            return;
+        }
+        if (currentVolume < minVolume) {
+            return;
+        }
+        this.currentVolume = currentVolume;
     }
 
 
-    // 2) переключение громкости
     public void increaseVolume() {
         if (currentVolume < maxVolume) {
             currentVolume = currentVolume + 1;
@@ -77,32 +74,38 @@ public class Radio {
         }
     }
 
-    // 1) настройка текущей станции
-   public int getCurrentStation() { // покажи текущую станцию
-        return currentStation;
-    }
-
-
-   public void setCurrentStation(int currentStation) {  // выставить значения станции, что хотим вывести
-        if (currentStation < minStation) { // от 0
-            return;
-        }
-        if (currentStation > maxStation) { // до 9
-            return;
-        }
-        this.currentStation = currentStation;
-    }
+    //   станция
 
     public int getMaxStation() {
         return maxStation;
+    }
+
+    public void setMaxStation(int maxStation) {
+        this.maxStation = maxStation;
     }
 
     public int getMinStation() {
         return minStation;
     }
 
+    public void setMinStation(int minStation) {
+        this.minStation = minStation;
+    }
 
-    // 2) переключение станции
+    public int getCurrentStation() {
+        return currentStation;
+    }
+
+    public void setCurrentStation(int currentStation) {
+        if (currentStation < minStation) {
+            return;
+        }
+        if (currentStation > maxStation) {
+            return;
+        }
+        this.currentStation = currentStation;
+    }
+
     public void increaseStation() {
         if (currentStation < maxStation) {
             currentStation = currentStation + 1;

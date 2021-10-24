@@ -10,23 +10,12 @@ public class RadioTest {
 
     private Radio radio = new Radio();
 
-    @Test
-    public void shouldUseCountConstructor() {
-
-        radio.setCountStation(10);
-
-        radio.getCountStation();
-
-        assertEquals(10, radio.getCountStation());
-    }
 
     // громкость
     @Test
     public void shouldMaxVolume() {
 
-        radio.setCurrentVolume(100); // setter, выставляем текущую громкость
-
-        radio.getMaxVolume(); //  тестируемое действие, метод
+        radio.setCurrentVolume(100);
 
         assertEquals(100, radio.getCurrentVolume());
     }
@@ -36,19 +25,17 @@ public class RadioTest {
 
         radio.setCurrentVolume(0);
 
-        radio.getMinVolume();
-
         assertEquals(0, radio.getCurrentVolume());
     }
 
     @Test
     public void shouldIncreaseMaxVolume() {
 
-        radio.setCurrentVolume(100);
+        radio.setMaxVolume(100);
 
         radio.increaseVolume();
 
-        assertEquals(100, radio.getCurrentVolume());
+        assertEquals(100, radio.getMaxVolume());
     }
 
     @Test
@@ -64,11 +51,11 @@ public class RadioTest {
     @Test
     public void shouldDecreaseMinVolume() {
 
-        radio.setCurrentVolume(0);
+        radio.setMinVolume(0);
 
         radio.decreaseVolume();
 
-        assertEquals(0, radio.getCurrentVolume());
+        assertEquals(0, radio.getMinVolume());
     }
 
     @Test
@@ -137,8 +124,6 @@ public class RadioTest {
 
         radio.setCurrentVolume(101);
 
-        radio.getCurrentVolume();
-
         assertEquals(0, radio.getCurrentVolume());
     }
 
@@ -146,8 +131,6 @@ public class RadioTest {
     public void shouldLessMinVolume() {
 
         radio.setCurrentVolume(-1);
-
-        radio.getCurrentVolume();
 
         assertEquals(0, radio.getCurrentVolume());
     }
@@ -158,7 +141,7 @@ public class RadioTest {
 
         radio.setCurrentStation(9);
 
-        radio.getCurrentStation();
+        radio.getMaxStation();
 
         assertEquals(9, radio.getCurrentStation());
     }
@@ -174,22 +157,32 @@ public class RadioTest {
     }
 
     @Test
-    public void shouldIncreaseMaxStation() {
+    public void shouldCountMaxStation() {
+
         radio.setCurrentStation(9);
 
-        radio.increaseStation();
-
-        assertEquals(0, radio.getCurrentStation());
+        assertEquals(10, radio.getCountStation());
 
     }
 
     @Test
     public void shouldDecreaseMinStation() {
-        radio.setCurrentStation(0);
 
+        radio.setMinStation(0);
+        radio.setCurrentStation(radio.getMinStation());
         radio.decreaseStation();
 
         assertEquals(9, radio.getMaxStation());
+    }
+
+    @Test
+    public void shouldIncreaseMaxStation2() {
+
+        radio.setMaxStation(9);
+        radio.setCurrentStation(radio.getMaxStation());
+        radio.increaseStation();
+
+        assertEquals(0, radio.getMinStation());
     }
 
     @Test
@@ -259,18 +252,17 @@ public class RadioTest {
         radio.increaseStation();
         radio.increaseStation();
 
-
         assertEquals(9, radio.getCurrentStation());
     }
 
     @Test
     public void shouldMoreMaxStation() {
 
-        radio.setCurrentStation(11);
+        radio.setCurrentStation(10);
 
-        radio.getCurrentStation();
+        radio.decreaseStation();
 
-        assertEquals(0, radio.getCurrentStation());
+        assertEquals(9, radio.getCurrentStation());
     }
 
     @Test
@@ -283,25 +275,56 @@ public class RadioTest {
         assertEquals(9, radio.getCurrentStation());
     }
 
-    @ParameterizedTest
-    @CsvSource(
-            {"5, 4",
-             "8, 7",
-             "0, 9"
-            })
 
-    public void shouldCountCurrentStationNumber(int countStation, int currentStation) {
+    @Test
+    public void shouldCountStation() {
 
-        Radio radio = new Radio(countStation, currentStation);
+        radio.setCountStation(4);
+        radio.setCurrentStation(3);
 
-        assertEquals(countStation, radio.getCountStation());
+        assertEquals(3, radio.getCurrentStation());
     }
 
+    @Test
+    public void shouldInitSettings() {
+
+        Radio radio = new Radio();
+
+        assertEquals(0, radio.getMinStation());
+        assertEquals(0, radio.getCurrentStation());
+        assertEquals(10, radio.getCountStation());
+        assertEquals(0, radio.getCurrentVolume());
+        assertEquals(9, radio.getMaxStation());
+        assertEquals(0, radio.getMinVolume());
+        assertEquals(100, radio.getMaxVolume());
+    }
+
+    @Test
+    public void shouldCurrentStationMinStation() {
+
+        radio.setCurrentStation(9);
+        radio.increaseStation();
+
+        assertEquals(0, radio.getMinStation());
+    }
+
+    @Test
+    public void shouldIncreaseX2Volume() {
+
+        radio.setCurrentVolume(20);
+
+        radio.increaseVolume();
+        radio.increaseVolume();
+
+        assertEquals(22, radio.getCurrentVolume());
+    }
+
+
     @ParameterizedTest
     @CsvSource(
-             {"5",
-              "8",
-              "0"
+            {"5",
+                    "8",
+                    "0"
             })
 
     public void shouldCountStation(int countStation) {
@@ -309,5 +332,53 @@ public class RadioTest {
         Radio radio = new Radio(countStation);
 
         assertEquals(countStation, radio.getCountStation());
+    }
+
+    @Test
+    public void shouldDecreaseIncreaseVolume2() {
+
+        radio.setCurrentVolume(100);
+        radio.setMaxVolume(100);
+
+        radio.increaseVolume();
+        radio.decreaseVolume();
+        radio.increaseVolume();
+        radio.decreaseVolume();
+        radio.decreaseVolume();
+        radio.decreaseVolume();
+        radio.increaseVolume();
+        radio.increaseVolume();
+        radio.increaseVolume();
+
+        assertEquals(100, radio.getCurrentVolume());
+    }
+
+    @Test
+    public void shouldUseNoArgsConstructor() {
+        Radio radio = new Radio();
+    }
+
+    @ParameterizedTest
+    @CsvSource(
+            {"1",
+             "2",
+             "3"
+            })
+
+    public void shouldCountConstructor(int countStation) {
+
+        Radio radio = new Radio(countStation);
+
+        assertEquals(countStation, radio.getCountStation());
+    }
+
+    @Test
+    public void shouldUseCountConstructor() {
+
+        radio.setCountStation(10);
+
+        radio.getCountStation();
+
+        assertEquals(10, radio.getCountStation());
     }
 }
