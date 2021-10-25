@@ -354,29 +354,29 @@ public class RadioTest {
 
     private Radio radio1 = new Radio(20);
 
-     @Test
-     public void shouldUseCountStationConstructor() {
+    @Test
+    public void shouldUseCountStationConstructor() {
 
-         assertEquals(19, radio1.calculateMaxStation());
+        assertEquals(19, radio1.calculateMaxStation());
 
-     }
+    }
 
-      @Test
-      public void shouldUseCountStationConstructor2() {
+    @Test
+    public void shouldUseCountStationConstructor2() {
 
-          radio1.setCurrentStation(70);
+        radio1.setCurrentStation(70);
 
-          assertEquals(0, radio1.getCurrentStation());
+        assertEquals(0, radio1.getCurrentStation());
 
-      }
+    }
 
 
-      @Test
-      public void shouldUseCountStationConstructorMinusStation() {
+    @Test
+    public void shouldUseCountStationConstructorMinusStation() {
 
-          radio1.setCurrentStation(-10);
+        radio1.setCurrentStation(-10);
 
-          assertEquals(0, radio1.getCurrentStation());
+        assertEquals(0, radio1.getCurrentStation());
 
-      }
- }
+    }
+}
