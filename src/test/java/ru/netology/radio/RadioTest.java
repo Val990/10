@@ -362,7 +362,7 @@ public class RadioTest {
 
     // count constructor
 
-    Radio radio1 = new Radio(20);
+    private Radio radio1 = new Radio(20);
 
      @Test
      public void shouldUseCountStationConstructor() {
