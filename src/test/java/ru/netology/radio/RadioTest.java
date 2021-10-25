@@ -367,9 +367,7 @@ public class RadioTest {
      @Test
      public void shouldUseCountStationConstructor() {
 
-         radio1.setCurrentStation(15);
-
-         assertEquals(15, radio1.getCurrentStation());
+         assertEquals(19, radio1.calculateMaxStation());
 
      }
 
@@ -382,14 +380,6 @@ public class RadioTest {
 
       }
 
-      @Test
-      public void shouldUseCountStationConstructor3() {
-
-          radio1.setCurrentStation(19);
-
-          assertEquals(20, radio1.getCountStation());
-
-      }
 
       @Test
       public void shouldUseCountStationConstructorMinusStation() {

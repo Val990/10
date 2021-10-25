@@ -10,8 +10,9 @@ public class Radio {
     // станция
     private int currentStation;
     private int minStation = 0;
-    private int maxStation = this.countStation - 1;
     private int countStation = 10;
+    private int maxStation = calculateMaxStation();
+
 
     public Radio() {
     }
@@ -76,6 +77,10 @@ public class Radio {
 
     //   станция
 
+    public int calculateMaxStation() {
+        return countStation - 1;
+    }
+
     public int getMaxStation() {
         return maxStation;
     }
@@ -100,14 +105,14 @@ public class Radio {
         if (newCurrentStation < minStation) {
             return;
         }
-        if (newCurrentStation > countStation - 1) {
+        if (newCurrentStation > maxStation) {
             return;
         }
         this.currentStation = newCurrentStation;
     }
 
     public void increaseStation() {
-        if (currentStation < countStation - 1) {
+        if (currentStation < maxStation) {
             currentStation = currentStation + 1;
         } else {
             currentStation = minStation;
