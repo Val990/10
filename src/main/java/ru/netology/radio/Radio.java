@@ -123,7 +123,7 @@ public class Radio {
         if (currentStation > minStation) {
             currentStation = currentStation - 1;
         } else {
-            currentStation = countStation - 1;
+            currentStation = maxStation;
         }
     }
 }

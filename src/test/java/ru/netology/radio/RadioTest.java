@@ -174,16 +174,6 @@ public class RadioTest {
     }
 
     @Test
-    public void shouldDecreaseMaxStation() {
-
-        radio.setMaxStation(10);
-
-        radio.decreaseStation();
-
-        assertEquals(9, radio.getCurrentStation());
-    }
-
-    @Test
     public void shouldIncreaseMinStation() {
 
         radio.setMinStation(0);
