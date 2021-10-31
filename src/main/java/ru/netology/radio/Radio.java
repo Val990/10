@@ -5,86 +5,113 @@ public class Radio {
     // громкость
     private int currentVolume;
     private int minVolume = 0;
-    private int maxVolume = 10;
+    private int maxVolume = 100;
 
     // станция
     private int currentStation;
-    private int minStation = 0;
-    private int maxStation = 9;
+    private int countStation = 10;
 
-    // 1) настройка текущей громкости
-    public int getCurrentVolume() { // покажи текущую громкость
-        return currentVolume;
+
+    public Radio() {
     }
 
-    public void setCurrentVolume(int currentVolume) {  // выставить значения громкости, что хотим вывести
-        if (currentVolume < minVolume) { // от 0
-            return;
-        }
-        if (currentVolume > maxVolume) { // до 10
-            return;
-        }
-        this.currentVolume = currentVolume;
+    public Radio(int countStation) {
+        this.countStation = countStation;
     }
+
+    public int getCountStation() {
+        return countStation;
+    }
+
+    public void setCountStation(int countStation) {
+        this.countStation = countStation;
+    }
+
+
+    //  громкость
+
 
     public int getMaxVolume() {
         return maxVolume;
+    }
+
+    public void setMaxVolume(int maxVolume) {
+        this.maxVolume = maxVolume;
     }
 
     public int getMinVolume() {
         return minVolume;
     }
 
-    // 2) переключение громкости
-    public void increaseVolume() {
+    public void setMinVolume(int minVolume) {
+        this.minVolume = minVolume;
+    }
+
+    public int getCurrentVolume() {
+        return currentVolume;
+    }
+
+    public void setCurrentVolume(int newCurrentVolume) {
+        if (newCurrentVolume > maxVolume) {
+            return;
+        }
+        if (newCurrentVolume < minVolume) {
+            return;
+        }
+        this.currentVolume = newCurrentVolume;
+    }
+
+
+    public int increaseVolume() {
         if (currentVolume < maxVolume) {
             currentVolume = currentVolume + 1;
         }
+        return currentVolume;
     }
 
-    public void decreaseVolume() {
+    public int decreaseVolume() {
         if (currentVolume > minVolume) {
             currentVolume = currentVolume - 1;
         }
+        return currentVolume;
     }
 
-    // 1) настройка текущей станции
-    public int getCurrentStation() { // покажи текущую станцию
+    //   станция
+
+
+    public int getCurrentStation() {
         return currentStation;
     }
 
-    public void setCurrentStation(int currentStation) {  // выставить значения станции, что хотим вывести
-        if (currentStation < minStation) { // от 0
+    public void setCurrentStation(int newCurrentStation) {
+        if (newCurrentStation < 0) {
             return;
         }
-        if (currentStation > maxStation) { // до 9
+        if (newCurrentStation > (countStation - 1)) {
             return;
         }
-        this.currentStation = currentStation;
+        this.currentStation = newCurrentStation;
     }
 
-    public int getMaxStation() {
-        return maxStation;
-    }
-
-    public int getMinStation() {
-        return minStation;
-    }
-
-    // 2) переключение станции
-    public void increaseStation() {
-        if (currentStation < maxStation) {
+    public int increaseStation() {
+        if (currentStation < (countStation - 1)) {
             currentStation = currentStation + 1;
-        } else {
-            currentStation = minStation;
+            return currentStation;
         }
+        if (currentStation == (countStation - 1)) {
+            currentStation = 0;
+        }
+        return currentStation;
     }
 
-    public void decreaseStation() {
-        if (currentStation > minStation) {
+    public int decreaseStation() {
+        if (currentStation > 0) {
             currentStation = currentStation - 1;
-        } else {
-            currentStation = maxStation;
+            return currentStation;
         }
+        if (currentStation == 0) {
+            currentStation = (countStation - 1);
+        }
+        return currentStation;
     }
 }
