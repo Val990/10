@@ -9,9 +9,7 @@ public class Radio {
 
     // станция
     private int currentStation;
-    private int minStation = 0;
     private int countStation = 10;
-    private int maxStation = calculateMaxStation();
 
 
     public Radio() {
@@ -32,6 +30,15 @@ public class Radio {
 
     //  громкость
 
+
+    public int getMaxVolume() {
+        return maxVolume;
+    }
+
+    public void setMaxVolume(int maxVolume) {
+        this.maxVolume = maxVolume;
+    }
+
     public int getMinVolume() {
         return minVolume;
     }
@@ -42,14 +49,6 @@ public class Radio {
 
     public int getCurrentVolume() {
         return currentVolume;
-    }
-
-    public int getMaxVolume() {
-        return maxVolume;
-    }
-
-    public void setMaxVolume(int maxVolume) {
-        this.maxVolume = maxVolume;
     }
 
     public void setCurrentVolume(int newCurrentVolume) {
@@ -63,67 +62,56 @@ public class Radio {
     }
 
 
-    public void increaseVolume() {
+    public int increaseVolume() {
         if (currentVolume < maxVolume) {
             currentVolume = currentVolume + 1;
         }
+        return currentVolume;
     }
 
-    public void decreaseVolume() {
+    public int decreaseVolume() {
         if (currentVolume > minVolume) {
             currentVolume = currentVolume - 1;
         }
+        return currentVolume;
     }
 
     //   станция
 
-    public int calculateMaxStation() {
-        return countStation - 1;
-    }
-
-    public int getMaxStation() {
-        return maxStation;
-    }
-
-    public void setMaxStation(int maxStation) {
-        this.maxStation = maxStation;
-    }
-
-    public int getMinStation() {
-        return minStation;
-    }
-
-    public void setMinStation(int minStation) {
-        this.minStation = minStation;
-    }
 
     public int getCurrentStation() {
         return currentStation;
     }
 
     public void setCurrentStation(int newCurrentStation) {
-        if (newCurrentStation < minStation) {
+        if (newCurrentStation < 0) {
             return;
         }
-        if (newCurrentStation > maxStation) {
+        if (newCurrentStation > (countStation - 1)) {
             return;
         }
         this.currentStation = newCurrentStation;
     }
 
-    public void increaseStation() {
-        if (currentStation < maxStation) {
+    public int increaseStation() {
+        if (currentStation < (countStation - 1)) {
             currentStation = currentStation + 1;
-        } else {
-            currentStation = minStation;
+            return currentStation;
         }
+        if (currentStation == (countStation - 1)) {
+            currentStation = 0;
+        }
+        return currentStation;
     }
 
-    public void decreaseStation() {
-        if (currentStation > minStation) {
+    public int decreaseStation() {
+        if (currentStation > 0) {
             currentStation = currentStation - 1;
-        } else {
-            currentStation = maxStation;
+            return currentStation;
         }
+        if (currentStation == 0) {
+            currentStation = (countStation - 1);
+        }
+        return currentStation;
     }
 }

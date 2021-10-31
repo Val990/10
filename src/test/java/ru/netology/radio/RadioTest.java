@@ -1,8 +1,6 @@
 package ru.netology.radio;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -51,7 +49,7 @@ public class RadioTest {
     @Test
     public void shouldDecreaseMinVolume() {
 
-        radio.setCurrentVolume(0);
+        radio.setMinVolume(0);
 
         radio.decreaseVolume();
 
@@ -61,7 +59,7 @@ public class RadioTest {
     @Test
     public void shouldIncreaseMinVolume() {
 
-        radio.setCurrentVolume(0);
+        radio.setMinVolume(0);
 
         radio.increaseVolume();
 
@@ -164,19 +162,9 @@ public class RadioTest {
     }
 
     @Test
-    public void shouldIncreaseMaxStation2() {
-
-        radio.setMaxStation(9);
-        radio.setCurrentStation(radio.getMaxStation());
-        radio.increaseStation();
-
-        assertEquals(0, radio.getMinStation());
-    }
-
-    @Test
     public void shouldIncreaseMinStation() {
 
-        radio.setMinStation(0);
+        radio.setCurrentStation(0);
 
         radio.increaseStation();
 
@@ -272,14 +260,6 @@ public class RadioTest {
 
     }
 
-    @Test
-    public void shouldCurrentStationMinStation() {
-
-        radio.setMaxStation(9);
-        radio.increaseStation();
-
-        assertEquals(0, radio.getMinStation());
-    }
 
     @Test
     public void shouldIncreaseX2Volume() {
@@ -290,21 +270,6 @@ public class RadioTest {
         radio.increaseVolume();
 
         assertEquals(22, radio.getCurrentVolume());
-    }
-
-
-    @ParameterizedTest
-    @CsvSource(
-            {"5",
-                    "8",
-                    "0"
-            })
-
-    public void shouldCountStation(int countStation) {
-
-        Radio radio = new Radio(countStation);
-
-        assertEquals(countStation, radio.getCountStation());
     }
 
     @Test
@@ -323,21 +288,8 @@ public class RadioTest {
 
     @Test
     public void shouldUseNoArgsConstructor() {
+
         Radio radio = new Radio();
-    }
-
-    @ParameterizedTest
-    @CsvSource(
-            {"1",
-                    "2",
-                    "3"
-            })
-
-    public void shouldCountConstructor(int countStation) {
-
-        Radio radio = new Radio(countStation);
-
-        assertEquals(countStation, radio.getCountStation());
     }
 
     @Test
@@ -354,31 +306,16 @@ public class RadioTest {
 
     private Radio radio1 = new Radio(20);
 
-    @Test
-    public void shouldUseCountStationConstructor() {
-
-        assertEquals(19, radio1.calculateMaxStation());
-
-    }
 
     @Test
     public void shouldUseCountStationConstructor0() {
 
         radio1.setCurrentStation(15);
-        radio1.calculateMaxStation();
 
-        assertEquals(20, radio1.getCountStation());
-
-    }
-
-    @Test
-    public void shouldUseCountStationConstructor1() {
-
-        radio1.setCurrentStation(19);
-
-        assertEquals(20, radio1.getCountStation());
+        assertEquals(15, radio1.getCurrentStation());
 
     }
+
 
     @Test
     public void shouldUseCountStationConstructor2() {
